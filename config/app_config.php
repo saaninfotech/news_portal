@@ -28,10 +28,10 @@ if (LOCAL_MODE === TRUE) {
     $__password = "";
     $__database = "hiifan_news_db";
 } else {
-    $__host = "";
-    $__user = "";
-    $__password = "";
-    $__database = "";
+    $__host = "saaninfotechcom.ipagemysql.com";
+    $__user = "hiifan_user123";
+    $__password = "hii_pass123";
+    $__database = "hiifan_news_db";
 }
 
 /* ****************** End: This is the Configuration for Database Credentials for the Application */
