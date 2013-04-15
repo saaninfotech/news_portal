@@ -29,7 +29,7 @@ class adminhomeController extends SaanController
 
     public function view_templates($args)
     {
-        $this->registry->template->Title = "HiiFan News Portal: View Email Templates";
+        $this->registry->template->Title = "HiiFan News Portal :: Admin Home Page :  View Email Templates";
         $templateListArray = $this->registry->model->run("getAllTemplateList", $args);
         $this->registry->template->PresentPage = $args['start_page'];
         $this->registry->template->TemplateListArray = $templateListArray;
