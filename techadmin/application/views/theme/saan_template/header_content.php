@@ -29,6 +29,7 @@
         </ul>
         <ul class="box">
             <li><a href="<?=__SITE_URL?>adminhome/view_templates"><span>Email Templates</span></a></li>
+            <li><a href="<?=__SITE_URL?>adminhome/view_news_category"><span>News Category</span></a></li>
             <!-- Active -->
         </ul>
     </div>
