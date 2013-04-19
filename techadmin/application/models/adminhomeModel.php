@@ -372,5 +372,70 @@ class adminhomeModel extends SaanModel
     }
 
     /** *********************** End: Video Queries ********************** */
+
+
+
+    /** ****************** Start: Banner Photos Queries ***************************** */
+
+    public function getAllBannerPhotoList($args)
+    {
+        $start = 0;
+        if (is_array($args) && isset($args['start_page'])) {
+            $start = $args['start_page'];
+            $start = $start * RECORDS_PER_PAGE;
+        }
+        $query = "SELECT * FROM banner_photo_details ORDER BY banner_photo_id DESC ";
+
+        return $this->db->paginateQuery($query, $start);
+    }
+
+    public function addBannerPhotos($dataArray)
+    {
+        return $this->db->query_insert('banner_photo_details', $dataArray);
+    }
+
+    public function deleteBannerPhoto($bannerPhotoId)
+    {
+        $query = "DELETE FROM banner_photo_details WHERE banner_photo_id = '$bannerPhotoId'";
+        return $this->db->query($query);
+    }
+
+
+    public function activateBannerPhoto($bannerPhotoId)
+    {
+        $query = "UPDATE banner_Photo_details SET
+                        banner_photo_status = 'active' WHERE banner_photo_id = '$bannerPhotoId'";
+        return $this->db->query($query);
+    }
+
+    public function deactivateBannerPhoto($bannerPhotoId)
+    {
+        $query = "UPDATE banner_photo_details SET
+                        banner_photo_status = 'inactive' WHERE banner_photo_id = '$bannerPhotoId'";
+        return $this->db->query($query);
+    }
+
+    public function getBannerPhotoByBannerPhotoId($bannerPhotoId)
+    {
+        if(isset($bannerPhotoId))
+        {
+            $query = "SELECT * FROM banner_photo_details WHERE banner_photo_id = '$bannerPhotoId'";
+            return $this->db->fetch_rows($query);
+        }
+    }
+
+    public function updateBannerPhotoByBannerPhotoId($args)
+    {
+        if(is_array($args) && count($args) > 0)
+        {
+            $taglineValue = $args['banner_photo_tagline'];
+            $descriptionValue = $args['banner_photo_description'];
+            $bannerPhotoId = $args['bannerPhoto_id'];
+            $query = "UPDATE banner_photo_details SET banner_photo_tagline = '$taglineValue', banner_photo_description = '$descriptionValue' WHERE banner_photo_id = '$bannerPhotoId'";
+            return $this->db->query($query);
+        }
+    }
+
+    /** *********************** End: Banner Photos Queries ********************** */
 }
 

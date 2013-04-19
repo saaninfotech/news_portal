@@ -671,7 +671,7 @@ class adminhomeController extends SaanController
 
                         $videoName = $videoId . ".jpg";
                         move_uploaded_file($_FILES["file"]["tmp_name"],
-                            __ADMIN_UPLOAD_PATH . "video/" . $videoName);
+                            __ADMIN_UPLOAD_PATH . "videos/" . $videoName);
 
                         $_SESSION['success'] = "Video Edited Successfully";
                         General::redirect($_SERVER['HTTP_REFERER']);
@@ -701,6 +701,178 @@ class adminhomeController extends SaanController
 
     /** ************************* End: Video Upload Section ****************************** */
 
+
+    /** ************************* Start: Banner Photo Upload Section **************************** */
+
+    public function view_banner_photos($args)
+    {
+        $this->registry->template->Title = "HiiFan News Portal :: Admin Home Page :  View Banner Photos";
+        $bannerPhotoListArray = $this->registry->model->run("getAllBannerPhotoList", $args);
+        $this->registry->template->PresentPage = $args['start_page'];
+        $this->registry->template->BannerPhotoListArray = $bannerPhotoListArray;
+        $this->registry->template->show("view_banner_photos");
+    }
+
+    public function add_banner_photos()
+    {
+        $this->registry->template->Title = "HiiFan News Portal :: Admin Home Page :  Add Banner Photos";
+        if($this->isPostBack())
+        {
+            $allowedExts = array("gif", "jpeg", "jpg", "png");
+
+            $extensionArray = explode(".", $_FILES["file"]["name"]);
+            $extension = $extensionArray[(count($extensionArray)-1)];
+            if ((($_FILES["file"]["type"] == "image/gif")
+                || ($_FILES["file"]["type"] == "image/jpeg")
+                || ($_FILES["file"]["type"] == "image/jpg")
+                || ($_FILES["file"]["type"] == "image/png"))
+                && ($_FILES["file"]["size"] < 2000000)
+                && in_array($extension, $allowedExts))
+            {
+                if ($_FILES["file"]["error"] > 0)
+                {
+                    $_SESSION['error'][] = $_FILES["file"]["error"];
+                }
+                $postArray = $this->requestPost();
+                if($postArray['banner_photo_tagline'] == '')
+                {
+                    $_SESSION['error'][] = "Please Enter Tagline";
+                }
+                if($postArray['banner_photo_description'] == '')
+                {
+                    $_SESSION['error'][] = "Please Enter Description";
+                }
+                if(count($_SESSION['error']) == 0)
+                {
+
+                    $dataArray = array('banner_photo_tagline' => $postArray['banner_photo_tagline'],
+                        'banner_photo_description' => $postArray['banner_photo_description']);
+
+                    $lastInsertedId = $this->registry->model->run('addBannerPhotos', $dataArray);
+
+                    $bannerPhotoName = $lastInsertedId . ".jpg";
+                    move_uploaded_file($_FILES["file"]["tmp_name"],
+                        __ADMIN_UPLOAD_PATH . "banner_photos/" . $bannerPhotoName);
+
+                    $_SESSION['success'] = "Banner Photo Added Successfully";
+                    General::redirect($_SERVER['HTTP_REFERER']);
+                    exit;
+
+                }
+            }
+            else
+            {
+                $_SESSION['error'][] = "Invalid File";
+            }
+        }
+        $this->registry->template->show("add_banner_photos");
+    }
+
+    public function deleteBannerPhoto($args)
+    {
+        $bannerPhotoId = $this->registry->security->decryptData($args['banner_photo_id']);
+        if($this->registry->model->run('deleteBannerPhoto', $bannerPhotoId))
+        {
+            unlink( __ADMIN_UPLOAD_PATH . "banner_photos/" . $bannerPhotoId . ".jpg");
+        }
+        $_SESSION['success'] = "Banner Photo Deleted Successfully";
+        General::redirect($_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
+    public function activateBannerPhoto($args)
+    {
+        $bannerPhotoId = $this->registry->security->decryptData($args['banner_photo_id']);
+        $this->registry->model->run('activateBannerPhoto', $bannerPhotoId);
+        $_SESSION['success'] = "Banner Photo Activated Successfully";
+        General::redirect($_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
+    public function deactivateBannerPhoto($args)
+    {
+        $bannerPhotoId = $this->registry->security->decryptData($args['banner_photo_id']);
+        $this->registry->model->run('deactivateBannerPhoto', $bannerPhotoId);
+        $_SESSION['success'] = "Banner Photo Deactivated Successfully";
+        General::redirect($_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
+    public function edit_banner_photos($args)
+    {
+        $this->registry->template->Title = "HiiFan News Portal :: Admin Home Page :  Edit Banner Photo";
+        if(is_array($args) && isset($args['banner_photo_id']))
+        {
+            $bannerPhotoId = $this->registry->security->decryptData($args['banner_photo_id']);
+        }
+
+        $bannerPhotoArray = $this->registry->model->run('getBannerPhotoByBannerPhotoId', $bannerPhotoId);
+        if(is_array($bannerPhotoArray))
+        {
+            $this->registry->template->BannerPhotoArray = $bannerPhotoArray;
+        }
+        if($this->isPostBack())
+        {
+            if($_FILES['file']['name'] != '')
+            {
+                $allowedExts = array("gif", "jpeg", "jpg", "png");
+
+                $extensionArray = explode(".", $_FILES["file"]["name"]);
+                $extension = $extensionArray[(count($extensionArray)-1)];
+                if ((($_FILES["file"]["type"] == "image/gif")
+                    || ($_FILES["file"]["type"] == "image/jpeg")
+                    || ($_FILES["file"]["type"] == "image/jpg")
+                    || ($_FILES["file"]["type"] == "image/png"))
+                    && ($_FILES["file"]["size"] < 2000000)
+                    && in_array($extension, $allowedExts))
+                {
+                    if ($_FILES["file"]["error"] > 0)
+                    {
+                        $_SESSION['error'][] = $_FILES["file"]["error"];
+                    }
+                    $postArray = $this->requestPost();
+                    if($postArray['banner_photo_tagline'] == '')
+                    {
+                        $_SESSION['error'][] = "Please Enter Tagline";
+                    }
+                    if(count($_SESSION['error']) == 0)
+                    {
+
+                        $dataArray = array('banner_photo_id' => $bannerPhotoId,
+                            'banner_photo_tagline' => $postArray['banner_photo_tagline']);
+
+
+                        $this->registry->model->run('updateBannerPhotoByBannerPhotoId', $dataArray);
+
+                        $bannerPhotoName = $bannerPhotoId . ".jpg";
+                        move_uploaded_file($_FILES["file"]["tmp_name"],
+                            __ADMIN_UPLOAD_PATH . "banner_photos/" . $bannerPhotoName);
+
+                        $_SESSION['success'] = "Banner Photo Edited Successfully";
+                        General::redirect($_SERVER['HTTP_REFERER']);
+                        exit;
+
+                    }
+                }
+                else
+                {
+                    $_SESSION['error'][] = "Invalid File";
+                }
+            }
+            else{
+                $postArray = $this->requestPost();
+                $dataArray = array('banner_photo_id' => $bannerPhotoId,
+                    'banner_photo_tagline' => $postArray['banner_photo_tagline']);
+
+                $this->registry->model->run('updateBannerPhotoByBannerPhotoId', $dataArray);
+                $_SESSION['success'] = "Banner Photo Edited Successfully";
+                General::redirect($_SERVER['HTTP_REFERER']);
+                exit;
+            }
+
+        }
+        $this->registry->template->show("edit_banner_photos");
+    }
 
     /**
      * @purpose: This is the Signout action
