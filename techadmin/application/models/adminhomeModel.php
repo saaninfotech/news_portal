@@ -310,5 +310,67 @@ class adminhomeModel extends SaanModel
             return $this->db->query($query);
         }
     }
+
+    /** ****************** Start: Video Queries ***************************** */
+
+    public function getAllVideoList($args)
+    {
+        $start = 0;
+        if (is_array($args) && isset($args['start_page'])) {
+            $start = $args['start_page'];
+            $start = $start * RECORDS_PER_PAGE;
+        }
+        $query = "SELECT * FROM video_details ORDER BY video_id DESC ";
+
+        return $this->db->paginateQuery($query, $start);
+    }
+
+    public function addVideos($dataArray)
+    {
+        return $this->db->query_insert('video_details', $dataArray);
+    }
+
+    public function deleteVideo($videoId)
+    {
+        $query = "DELETE FROM video_details WHERE video_id = '$videoId'";
+        return $this->db->query($query);
+    }
+
+
+    public function activateVideo($videoId)
+    {
+        $query = "UPDATE video_details SET
+                        video_status = 'active' WHERE video_id = '$videoId'";
+        return $this->db->query($query);
+    }
+
+    public function deactivateVideo($videoId)
+    {
+        $query = "UPDATE video_details SET
+                        video_status = 'inactive' WHERE video_id = '$videoId'";
+        return $this->db->query($query);
+    }
+
+    public function getVideoByVideoId($videoId)
+    {
+        if(isset($videoId))
+        {
+            $query = "SELECT * FROM video_details WHERE video_id = '$videoId'";
+            return $this->db->fetch_rows($query);
+        }
+    }
+
+    public function updateVideoByVideoId($args)
+    {
+        if(is_array($args) && count($args) > 0)
+        {
+            $taglineValue = $args['video_tagline'];
+            $videoId = $args['video_id'];
+            $query = "UPDATE video_details SET video_tagline = '$taglineValue' WHERE video_id = '$videoId'";
+            return $this->db->query($query);
+        }
+    }
+
+    /** *********************** End: Video Queries ********************** */
 }
 

@@ -532,6 +532,176 @@ class adminhomeController extends SaanController
     /** ************************* End: Photo Upload Section ****************************** */
 
 
+    /** ************************* Start: Video Upload Section **************************** */
+
+    public function view_videos($args)
+    {
+        $this->registry->template->Title = "HiiFan News Portal :: Admin Home Page :  View Videos";
+        $videoListArray = $this->registry->model->run("getAllVideoList", $args);
+        $this->registry->template->PresentPage = $args['start_page'];
+        $this->registry->template->VideoListArray = $videoListArray;
+        $this->registry->template->show("view_videos");
+    }
+
+    public function add_videos()
+    {
+        $this->registry->template->Title = "HiiFan News Portal :: Admin Home Page :  Add Videos";
+        if($this->isPostBack())
+        {
+            $allowedExts = array("gif", "jpeg", "jpg", "png");
+
+            $extensionArray = explode(".", $_FILES["file"]["name"]);
+            $extension = $extensionArray[(count($extensionArray)-1)];
+            if ((($_FILES["file"]["type"] == "image/gif")
+                || ($_FILES["file"]["type"] == "image/jpeg")
+                || ($_FILES["file"]["type"] == "image/jpg")
+                || ($_FILES["file"]["type"] == "image/png"))
+                && ($_FILES["file"]["size"] < 2000000)
+                && in_array($extension, $allowedExts))
+            {
+                if ($_FILES["file"]["error"] > 0)
+                {
+                    $_SESSION['error'][] = $_FILES["file"]["error"];
+                }
+                $postArray = $this->requestPost();
+                if($postArray['video_tagline'] == '')
+                {
+                    $_SESSION['error'][] = "Please Enter Tagline";
+                }
+                if(count($_SESSION['error']) == 0)
+                {
+
+                    $dataArray = array('video_tagline' => $postArray['video_tagline']);
+
+                    $lastInsertedId = $this->registry->model->run('addVideos', $dataArray);
+
+                    $videoName = $lastInsertedId . ".jpg";
+                    move_uploaded_file($_FILES["file"]["tmp_name"],
+                        __ADMIN_UPLOAD_PATH . "videos/" . $videoName);
+
+                    $_SESSION['success'] = "Video Added Successfully";
+                    General::redirect($_SERVER['HTTP_REFERER']);
+                    exit;
+
+                }
+            }
+            else
+            {
+                $_SESSION['error'][] = "Invalid File";
+            }
+        }
+        $this->registry->template->show("add_videos");
+    }
+
+    public function deleteVideo($args)
+    {
+        $videoId = $this->registry->security->decryptData($args['video_id']);
+        if($this->registry->model->run('deleteVideo', $videoId))
+        {
+            unlink( __ADMIN_UPLOAD_PATH . "videos/" . $videoId . ".jpg");
+        }
+        $_SESSION['success'] = "Video Deleted Successfully";
+        General::redirect($_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
+    public function activateVideo($args)
+    {
+        $videoId = $this->registry->security->decryptData($args['video_id']);
+        $this->registry->model->run('activateVideo', $videoId);
+        $_SESSION['success'] = "Video Activated Successfully";
+        General::redirect($_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
+    public function deactivateVideo($args)
+    {
+        $videoId = $this->registry->security->decryptData($args['video_id']);
+        $this->registry->model->run('deactivateVideo', $videoId);
+        $_SESSION['success'] = "Video Deactivated Successfully";
+        General::redirect($_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
+    public function edit_videos($args)
+    {
+        $this->registry->template->Title = "HiiFan News Portal :: Admin Home Page :  Edit Video";
+        if(is_array($args) && isset($args['video_id']))
+        {
+            $videoId = $this->registry->security->decryptData($args['video_id']);
+        }
+
+        $videoArray = $this->registry->model->run('getVideoByVideoId', $videoId);
+        if(is_array($videoArray))
+        {
+            $this->registry->template->PhotoArray = $videoArray;
+        }
+        if($this->isPostBack())
+        {
+            if($_FILES['file']['name'] != '')
+            {
+                $allowedExts = array("gif", "jpeg", "jpg", "png");
+
+                $extensionArray = explode(".", $_FILES["file"]["name"]);
+                $extension = $extensionArray[(count($extensionArray)-1)];
+                if ((($_FILES["file"]["type"] == "image/gif")
+                    || ($_FILES["file"]["type"] == "image/jpeg")
+                    || ($_FILES["file"]["type"] == "image/jpg")
+                    || ($_FILES["file"]["type"] == "image/png"))
+                    && ($_FILES["file"]["size"] < 2000000)
+                    && in_array($extension, $allowedExts))
+                {
+                    if ($_FILES["file"]["error"] > 0)
+                    {
+                        $_SESSION['error'][] = $_FILES["file"]["error"];
+                    }
+                    $postArray = $this->requestPost();
+                    if($postArray['video_tagline'] == '')
+                    {
+                        $_SESSION['error'][] = "Please Enter Tagline";
+                    }
+                    if(count($_SESSION['error']) == 0)
+                    {
+
+                        $dataArray = array('video_id' => $videoId,
+                            'video_tagline' => $postArray['video_tagline']);
+
+
+                        $this->registry->model->run('updateVideoByVideoId', $dataArray);
+
+                        $videoName = $videoId . ".jpg";
+                        move_uploaded_file($_FILES["file"]["tmp_name"],
+                            __ADMIN_UPLOAD_PATH . "video/" . $videoName);
+
+                        $_SESSION['success'] = "Video Edited Successfully";
+                        General::redirect($_SERVER['HTTP_REFERER']);
+                        exit;
+
+                    }
+                }
+                else
+                {
+                    $_SESSION['error'][] = "Invalid File";
+                }
+            }
+            else{
+                $postArray = $this->requestPost();
+                $dataArray = array('video_id' => $videoId,
+                    'video_tagline' => $postArray['video_tagline']);
+
+                $this->registry->model->run('updateVideoByVideoId', $dataArray);
+                $_SESSION['success'] = "Video Edited Successfully";
+                General::redirect($_SERVER['HTTP_REFERER']);
+                exit;
+            }
+
+        }
+        $this->registry->template->show("edit_videos");
+    }
+
+    /** ************************* End: Video Upload Section ****************************** */
+
+
     /**
      * @purpose: This is the Signout action
      * @author: Rishabh Dev Bansal
