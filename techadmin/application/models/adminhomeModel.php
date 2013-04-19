@@ -86,6 +86,13 @@ class adminhomeModel extends SaanModel
         return $this->db->paginateQuery($query, $start);
     }
 
+    public function getCategoryList()
+    {
+        $query = "SELECT * FROM news_category_details ORDER BY news_category_id ASC ";
+
+        return $this->db->fetch_rows($query);
+    }
+
     /**
      * @param $categoryArray
      * @return mixed
@@ -96,7 +103,7 @@ class adminhomeModel extends SaanModel
             $categoryName = $categoryArray['news_category_name'];
             $categoryDescription = $categoryArray['news_category_description'];
             $categoryStatus = $categoryArray['news_category_status'];
-            echo $query = "UPDATE news_category_details SET
+            $query = "UPDATE news_category_details SET
                 news_category_name = '$categoryName',
                 news_category_description = '$categoryDescription',
                 news_category_status = '$categoryStatus'
@@ -156,7 +163,152 @@ class adminhomeModel extends SaanModel
         return $this->db->query($query);
     }
 
+    public function addNews($postArray)
+    {
+        return $this->db->query_insert('news_details', $postArray);
+    }
+
+    public function getAllNews($args)
+    {
+        $start = 0;
+        if (is_array($args) && isset($args['start_page'])) {
+            $start = $args['start_page'];
+            $start = $start * RECORDS_PER_PAGE;
+        }
+        $query = "SELECT N.*, CN.news_category_name
+                        FROM news_details N
+                            INNER JOIN news_category_details CN
+                                ON N.news_category_id = CN.news_category_id
+                        ORDER BY news_id DESC ";
+
+        return $this->db->paginateQuery($query, $start);
+    }
+
+    /**
+     * @param $newsId
+     * @return mixed
+     */
+    public function deleteNews($newsId)
+    {
+        $query = "DELETE FROM news_details WHERE news_id = '$newsId'";
+        return $this->db->query($query);
+    }
+
+    /**
+     * @param $newsId
+     * @return mixed
+     */
+    public function activateNews($newsId)
+    {
+        $query = "UPDATE news_details SET
+                        news_status = 'active' WHERE news_id = '$newsId'";
+        return $this->db->query($query);
+    }
+
+    /**
+     * @param $newsId
+     * @return mixed
+     */
+    public function deactivateNews($newsId)
+    {
+        $query = "UPDATE news_details SET
+                        news_status = 'inactive' WHERE news_id = '$newsId'";
+        return $this->db->query($query);
+    }
+
+    public function getNewsByNewsId($newsId)
+    {
+        $query = "SELECT * FROM news_details WHERE news_id = '$newsId'";
+        return $this->db->fetch_rows($query);
+    }
+
+    public function updateNewsById($newsArray)
+    {
+        if(is_array($newsArray) && count($newsArray) > 0)
+        {
+            $newsId = $newsArray['news_id'];
+            $newsCategoryId = $newsArray['news_category_id'];
+            $newsContentType = $newsArray['news_content_type'];
+            $newsSubject = $newsArray['news_subject'];
+            $newsDescription = $newsArray['news_description'];
+            $newsMetaTitle = $newsArray['news_meta_title'];
+            $newsMetaDescription = $newsArray['news_meta_description'];
+            $newsMetaKeyword = $newsArray['news_meta_keyword'];
+            $isSocialAllowed = $newsArray['is_social_allowed'];
+
+            $query = "UPDATE news_details SET
+                            news_category_id = '$newsCategoryId',
+                            news_content_type = '$newsContentType',
+                            news_subject = '$newsSubject',
+                            news_description = '$newsDescription',
+                            news_meta_title = '$newsMetaTitle',
+                            news_meta_description = '$newsMetaDescription',
+                            news_meta_keyword = '$newsMetaKeyword',
+                            is_social_allowed = '$isSocialAllowed'
+                      WHERE news_id = '$newsId'";
+            return $this->db->query($query);
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function getAllPhotoList($args)
+    {
+        $start = 0;
+        if (is_array($args) && isset($args['start_page'])) {
+            $start = $args['start_page'];
+            $start = $start * RECORDS_PER_PAGE;
+        }
+        $query = "SELECT * FROM photo_details ORDER BY photo_id DESC ";
+
+        return $this->db->paginateQuery($query, $start);
+    }
+
+    public function addPhotos($dataArray)
+    {
+        return $this->db->query_insert('photo_details', $dataArray);
+    }
+
+    public function deletePhoto($photoId)
+    {
+        $query = "DELETE FROM photo_details WHERE photo_id = '$photoId'";
+        return $this->db->query($query);
+    }
 
 
+    public function activatePhoto($photoId)
+    {
+        $query = "UPDATE photo_details SET
+                        photo_status = 'active' WHERE photo_id = '$photoId'";
+        return $this->db->query($query);
+    }
+
+    public function deactivatePhoto($photoId)
+    {
+        $query = "UPDATE photo_details SET
+                        photo_status = 'inactive' WHERE photo_id = '$photoId'";
+        return $this->db->query($query);
+    }
+
+    public function getPhotoByPhotoId($photoId)
+    {
+        if(isset($photoId))
+        {
+            $query = "SELECT * FROM photo_details WHERE photo_id = '$photoId'";
+            return $this->db->fetch_rows($query);
+        }
+    }
+
+    public function updatePhotoByPhotoId($args)
+    {
+        if(is_array($args) && count($args) > 0)
+        {
+            $taglineValue = $args['photo_tagline'];
+            $photoId = $args['photo_id'];
+            $query = "UPDATE photo_details SET photo_tagline = '$taglineValue' WHERE photo_id = '$photoId'";
+            return $this->db->query($query);
+        }
+    }
 }
 

@@ -22,6 +22,7 @@ $__serverValue = $_SERVER['HTTP_HOST'];
 $__directory = substr(dirname($_SERVER['PHP_SELF']), 1);
 $__site_path = $_SERVER['DOCUMENT_ROOT'] . "/" . $__directory;
 
+
 /******************************* Start: Base System Path ****************************** */
 
 /*
@@ -67,13 +68,17 @@ define('__EXTERNAL_PATH', __SITE_PATH . "/../externals");
 
 define('__EXTERNAL_URL', __SITE_URL . "../externals/");
 
-define('__FRONT_PATH', __SITE_PATH . "/../");
+define('__FRONT_PATH', __SITE_PATH . "../");
 
 define('__FRONT_URL', __SITE_URL . "../");
 
 define('__FRONT_UPLOAD_PATH', __FRONT_PATH . "application/views/uploads/");
 
 define('__FRONT_UPLOAD_URL', __FRONT_URL . "application/views/uploads/");
+
+define('__ADMIN_UPLOAD_PATH', __SITE_PATH . "/application/views/uploads/");
+
+define('__ADMIN_UPLOAD_URL', __SITE_URL . "application/views/uploads/");
 
 /******************************* End: Application Path ******************************** */
 

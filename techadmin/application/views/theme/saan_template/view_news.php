@@ -28,31 +28,35 @@
     <hr class="noscreen"/>
     <!-- Content (Right Column) -->
     <div id="content" class="box">
-        <h1>Welcome Administrator...<span style="float:right">View News Category Page</span></h1>
+        <h1>Welcome Administrator...<span style="float:right">View News Details Page</span></h1>
         <!-- Headings -->
         <div><?=General::getMessage()?></div>
         <table width="100%">
-            <tr>
-                <td align="right"><a href="<?=__SITE_URL?>adminhome/add_news_category">Add News Category</a> </td>
-            </tr>
-            <?php
+            
+                <tr>
+                    <td align="right"><a href="<?=__SITE_URL?>adminhome/add_news">Add News</a> </td>
+                </tr>
+                <?php
 
-            if (count($CategoryListArray['result_set']) > 0) {
+            if (count($NewsListArray['result_set']) > 0) {
                 ?>
-
                 <tr>
                     <td align="center">
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <th width="5%">Sl No.</th>
-                                <th width="15%">Category Name</th>
-                                <th width="37%">Description</th>
-                                <th width="9%">Status</th>
-                                <th width="9%" align="center">Actions</th>
+                                <th width="12%">Category Name</th>
+                                <th width="10%">Content Type</th>
+                                <!-- <th width="12%">Upload Content</th> -->
+                                <th width="40%">News Title</th>
+                                <th width="10%">News Status</th>
+                                <th width="" align="center">Actions</th>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td></td>
+                                <td></td>
+                                <!-- <td></td> -->
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -60,40 +64,45 @@
 
                             <?php
                             $i = 1;
-                            foreach ($CategoryListArray['result_set'] as $categoryArray) {
+                            foreach ($NewsListArray['result_set'] as $newsArray) {
                                 ?>
                                 <tr>
                                     <td><?=$i?></td>
-                                    <td><?=$categoryArray['news_category_name']?></td>
-                                    <td><?=$categoryArray['news_category_description']?></td>
-                                    <td><?=$categoryArray['news_category_status']?></td>
+                                    <td><?=$newsArray['news_category_name']?></td>
+                                    <td><?=$newsArray['news_content_type']?></td>
+                                    <!-- <td>
+                                    	<a href="<?=__SITE_URL?>adminhome/upload_video/news_id:<?=$this->registry->security->encryptData($newsArray['news_id'])?>">Upload Video</a>
+                                        <a href="<?=__SITE_URL?>adminhome/upload_photo/news_id:<?=$this->registry->security->encryptData($newsArray['news_id'])?>">Upload Photo</a>
+                                    </td> -->
+                                    <td><?=$newsArray['news_subject']?></td>
+                                    <td><?=$newsArray['news_status']?></td>
                                     <td>
-                                        <a title="Delete Category"
-                                           href="<?=__SITE_URL?>adminhome/deleteCategory/news_category_id:<?=$this->registry->security->encryptData($categoryArray['news_category_id'])?>"
+                                        <a title="Delete News"
+                                           href="<?=__SITE_URL?>adminhome/deleteNews/news_id:<?=$this->registry->security->encryptData($newsArray['news_id'])?>"
                                            onClick="return confirm('Do You really Want To Delete This?');">
                                             <img src="<?=__TEMPLATE_URL . "images/del.png"?>">
                                         </a>
                                         <?php
-                                        if ($categoryArray['news_category_status'] == 'active') {
+                                        if ($newsArray['news_status'] == 'active') {
                                             ?>
-                                            <a title="Deactivate Category"
+                                            <a title="Deactivate News"
                                                onClick="return confirm('Do you want to change the status');"
-                                               href="<?=__SITE_URL?>adminhome/deactivateCategory/news_category_id:<?=$this->registry->security->encryptData($categoryArray['news_category_id'])?>">
+                                               href="<?=__SITE_URL?>adminhome/deactivateNews/news_id:<?=$this->registry->security->encryptData($newsArray['news_id'])?>">
                                                 <img src="<?=__TEMPLATE_URL . "images/ico-done.gif" ?>">
                                             </a>
                                             <?php
                                         } else {
                                             ?>
-                                            <a title="Activate Category"
+                                            <a title="Activate News"
                                                onClick="return confirm('Do you want to change the status');"
-                                               href="<?=__SITE_URL?>adminhome/activateCategory/news_category_id:<?=$this->registry->security->encryptData($categoryArray['news_category_id'])?>">
+                                               href="<?=__SITE_URL?>adminhome/activateNews/news_id:<?=$this->registry->security->encryptData($newsArray['news_id'])?>">
                                                 <img src="<?=__TEMPLATE_URL . "images/ico-warning.gif" ?>">
                                             </a>
                                             <?php
                                         }
                                         ?>
-                                        <a title="Edit Category"
-                                           href="<?=__SITE_URL?>adminhome/editCategory/news_category_id:<?=$this->registry->security->encryptData($categoryArray['news_category_id'])?>">
+                                        <a title="Edit News"
+                                           href="<?=__SITE_URL?>adminhome/edit_news/news_id:<?=$this->registry->security->encryptData($newsArray['news_id'])?>">
                                             <img src="<?=__TEMPLATE_URL . "images/edit.png"?>">
                                         </a>
                                     </td>
@@ -107,7 +116,7 @@
                 <tr>
                     <td>
                         <?php
-                        $paginationContent = General::getFullNavigation($CategoryListArray['total_rows'], $CategoryListArray['total_pages'], $PresentPage, "adminhome/view_news_category");
+                        $paginationContent = General::getFullNavigation($NewsArrayList['total_rows'], $NewsArrayList['total_pages'], $PresentPage, "adminhome/view_news");
                         echo $paginationContent;
                         ?>
                     </td>
