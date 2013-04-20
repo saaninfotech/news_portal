@@ -43,4 +43,24 @@ class appModel
         return self::$db->fetch_rows($query);
     }
 
+    static function getTopStories()
+    {
+        $query = "SELECT * FROM news_details WHERE news_status = 'active' ORDER BY news_id DESC LIMIT 0, 5";
+        return self::$db->fetch_rows($query);
+    }
+
+    static function getAllNews()
+    {
+        $query = "SELECT
+                  N.*,
+                  NC.news_category_name
+                FROM
+                  news_details N
+                  INNER JOIN news_category_details NC
+                    ON N.news_category_id = NC.news_category_id
+                WHERE N.news_status = 'active'
+                ORDER BY N.news_id DESC";
+        return self::$db->fetch_rows($query);
+    }
+
 }

@@ -20,7 +20,7 @@
 @session_start();
 
 //This is for the Error Reporting Handling
-//error_reporting(0);
+error_reporting(0);
 
 //This is the setting for the Local Mode
 define("LOCAL_MODE", TRUE);

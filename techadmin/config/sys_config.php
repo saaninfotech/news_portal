@@ -70,7 +70,7 @@ define('__EXTERNAL_URL', __SITE_URL . "../externals/");
 
 define('__EXTRA_PATH', __SITE_PATH . "/../extras");
 
-define('__CACHE_PATH', __EXTRAS_PATH . "/cache");
+define('__CACHE_PATH', __EXTRA_PATH . "/cache");
 
 define('__FRONT_PATH', __SITE_PATH . "../");
 

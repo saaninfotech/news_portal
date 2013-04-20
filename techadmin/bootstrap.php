@@ -91,14 +91,14 @@ require_once("config/app_config.php");
 
 
 /** *****************Start: Settings for Paypal Payment Gateway ************************** */
-
+/*
 if (PAYPAL_USE_SANDBOX === TRUE) {
     define('PAYPAL_API_ENDPOINT', 'https://api-3t.sandbox.paypal.com/nvp');
     define('PAYPAL_URL', "https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&token=");
 } else {
     define('PAYPAL_API_ENDPOINT', "https://api-3t.paypal.com/nvp");
     define('PAYPAL_URL', "https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=");
-}
+}*/
 
 //This includes the Paypal Payment Gateway.
 require_once __HELPER_PATH . 'class.PaypalPayment.php';
@@ -115,7 +115,7 @@ require __HELPER_PATH . 'class.Captcha.php';
 require __HELPER_PATH . 'class.BreadCrumbs.php';
 
 //This is the Cache Class
-require __HELPER_PATH . 'class.CacheHandler.php';
+//require __HELPER_PATH . 'class.CacheHandler.php';
 
 /* ************************* Start: This is to manage the Template for the Application ******************** */
 

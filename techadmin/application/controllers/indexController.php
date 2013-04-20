@@ -31,8 +31,9 @@ class indexController extends SaanController
         }
 
         if (($this->registry->model->run('checkAdminByIdnPass', $postArray)) > 0) {
-            $_SESSION['adminLogin'] = $adminArgs['txtUsername'];
+            $_SESSION['adminLogin'] = $postArray['txtUsername'];
             header("Location: " . __SITE_URL . "adminhome");
+            exit;
         } else {
             $this->registry->template->ErrorLogin = "style=\"display:block;\"";
         }

@@ -44,4 +44,32 @@ class appController
         }
         return $newsCategoryArray;
     }
+
+    static function getTopStories()
+    {
+        $topStoryArray = CacheHandler::retrieve_cache('top_stories_array',75);
+        if($topStoryArray == "")
+        {
+            $topStoryArray = appModel::getTopStories();
+            CacheHandler::cache_content('top_stories_array', $topStoryArray, 10000);
+        }
+        return $topStoryArray;
+    }
+
+    static function getAllNews()
+    {
+        $newsArray = CacheHandler::retrieve_cache('news_array',75);
+        if($newsArray == "")
+        {
+            $newsArray = appModel::getAllNews();
+            $finalNewsArray = array();
+            foreach($newsArray as $newsKey=>$newsValue)
+            {
+                $finalNewsArray[strtolower($newsValue['news_category_name'])][] = $newsValue['news_key'] . '--^--' . ucwords($newsValue['news_subject']) . '--^--' . ucfirst($newsValue['news_description']);
+            }
+            CacheHandler::cache_content('news_array', $finalNewsArray, 10000);
+        }
+        $finalNewsArray = $newsArray;
+        return $finalNewsArray;
+    }
 }
