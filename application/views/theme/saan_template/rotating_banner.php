@@ -9,6 +9,7 @@
             <div class="main-slider-content" style="width:684px; height:300px;">
                 <ul class="sliders-wrap-inner">
                     <?php
+                    $BannerPhotoArray = appController::getBannerPhoto();
                     if(is_array($BannerPhotoArray) && count($BannerPhotoArray) > 0)
                     {
                         foreach($BannerPhotoArray as $bannerKey=>$bannerArray)

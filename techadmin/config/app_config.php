@@ -30,7 +30,7 @@ if (LOCAL_MODE === TRUE) {
 } else {
     $__host = "saaninfotechcom.ipagemysql.com";
     $__user = "hiifan_user123";
-    $__password = "hii_pass123";
+    $__password = "hiifan_pass@123";
     $__database = "hiifan_news_db";
 }
 
@@ -41,8 +41,8 @@ if (LOCAL_MODE === TRUE) {
 $__smtpServer = "smtp.gmail.com";
 $__portNo = "465";
 $__useSSL = "ssl";
-$__smtpUser = "sinha.ksaurabh@gmail.com";
-$__smtpPassword = "jaibhole@123";
+$__smtpUser = "hiifannews@gmail.com";
+$__smtpPassword = "HiiFan@123";
 
 define('FROM_EMAIL', "no-reply@domain.com");
 define('FROM_NAME', "Domain Name");
@@ -72,7 +72,5 @@ define('PAYPAL_VERSION', '64');
 define('RECORDS_PER_PAGE', 10);
 
 /** **************************** Start: This is the CAche Configuration **************** */
-$config['cache'] = array(
-    'priority_required' => 50,
-    'caching_path' => __CACHE_PATH
-);
+define('PRIORITY_REQUIRED', 50);
+define('CACHING_PATH', __CACHE_PATH . "/");

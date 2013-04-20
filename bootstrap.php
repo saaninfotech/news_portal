@@ -113,6 +113,9 @@ require __HELPER_PATH . 'class.Captcha.php';
 //This includes the Breadcrumbs Helper Class for the application.
 require __HELPER_PATH . 'class.BreadCrumbs.php';
 
+//This is the Cache Class
+require __HELPER_PATH . 'class.CacheHandler.php';
+
 /* ************************* Start: This is to manage the Template for the Application ******************** */
 
 define ('__TEMPLATE_NAME', $__template_name);
@@ -142,7 +145,7 @@ require __CORE_PATH . 'class.Validation.php';
 require __CORE_PATH . 'class.General.php';
 require __CORE_PATH . 'class.Security.php';
 require __CORE_PATH . 'class.ImageResize.php';
-require __CORE_PATH . 'class.CacheHandler.php';
+
 
 //This is done to provide the common controller and model apart from the SAAN Controller and SAAN Model.
 require_once __MODEL_PATH . "appModel.php";

@@ -30,7 +30,7 @@ if (LOCAL_MODE === TRUE) {
 } else {
     $__host = "saaninfotechcom.ipagemysql.com";
     $__user = "hiifan_user123";
-    $__password = "hii_pass123";
+    $__password = "hiifan_pass@123";
     $__database = "hiifan_news_db";
 }
 
@@ -55,7 +55,5 @@ define('FAILED_NAME', "HiiFan News");
 define('RECORDS_PER_PAGE', 10);
 
 /** **************************** Start: This is the CAche Configuration **************** */
-$cacheConfig['cache'] = array(
-    'priority_required' => 50,
-    'caching_path' => __CACHE_PATH . "/"
-);
+define('PRIORITY_REQUIRED', 50);
+define('CACHING_PATH', __CACHE_PATH . "/");

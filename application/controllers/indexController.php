@@ -24,13 +24,6 @@ class indexController extends SaanController
     public function index()
     {
         $this->registry->template->Title = "SAAN Infotech :: Home Page";
-        $bannerPhotoArray = $this->registry->cache->retrieve_cache('banner_photo_array',75);
-        if($bannerPhotoArray == "")
-        {
-            $bannerPhotoArray = $this->registry->model->run('getBannerPhoto');
-            $this->registry->cache->cache_content('random value', $bannerPhotoArray, 10000);
-        }
-        $this->registry->template->BannerPhotoArray= $bannerPhotoArray;
         $this->registry->template->show("index");
     }
 }

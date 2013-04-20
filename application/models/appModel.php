@@ -31,4 +31,16 @@ class appModel
         return self::$db->fetch_rows($query);
     }
 
+    static public function getBannerPhoto()
+    {
+        $query = "SELECT * FROM banner_photo_details WHERE banner_photo_status = 'active'";
+        return self::$db->fetch_rows($query);
+    }
+
+    static function getAllCategory()
+    {
+        $query = "SELECT * FROM news_category_details WHERE news_category_status = 'active'";
+        return self::$db->fetch_rows($query);
+    }
+
 }

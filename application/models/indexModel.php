@@ -17,9 +17,5 @@
 /***********************************************************************/
 class indexModel extends SaanModel
 {
-    public function getBannerPhoto()
-    {
-        $query = "SELECT * FROM banner_photo_details WHERE banner_photo_status = 'active'";
-        return $this->db->fetch_rows($query);
-    }
+
 }
