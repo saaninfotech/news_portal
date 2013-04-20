@@ -20,12 +20,12 @@
 
                                 <div class="slider-description">
                                     <div class="slider-meta"><a target="_parent" title="<?=$bannerArray['banner_photo_tagline']?>"
-                                                                href="#Category-1">/ <?=$bannerArray['banner_photo_tagline']?> /</a> <i> —
+                                                                href="<?=__SITE_URL?>pages/view_banner_photo/banner_photo_id:<?=$this->registry->security->encryptData($bannerArray['banner_photo_id'])?>">/ <?=$bannerArray['banner_photo_tagline']?> /</a> <i> —
                                         <?=date("d M Y H:i A")?></i></div>
                                     <h4><?=ucwords($bannerArray['banner_photo_tagline'])?></h4>
 
                                     <p><?=$bannerArray['banner_photo_description']?>... <a class="readmore"
-                                                                                                          href="#">Read
+                                                                                                          href="<?=__SITE_URL?>pages/view_banner_photo/banner_photo_id:<?=$this->registry->security->encryptData($bannerArray['banner_photo_id'])?>">Read
                                             more </a></p>
                                 </div>
                             </li>

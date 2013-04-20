@@ -16,9 +16,9 @@
                     foreach($TopStoriesArray as $topKey=>$topArray)
                     {
                     ?>
-                        <li><a href="<?=__SITE_URL?>pages/readnews/news_id:<?=$this->registry->security->encryptData($topArray['news_id'])?>"><h3><?=ucwords($topArray['news_subject'])?></h3>
-                            <?=ucfirst(substr($topArray['news_description'], 0, 250))?>
-                            <small>More >></small>
+                        <li><a href="<?=__SITE_URL?>pages/readnews/news_id:<?=$this->registry->security->encryptData($topArray['news_id'])?>"><div style="margin-bottom:-12px; color:#4169e1;text-decoration: none; font-weight: bold;""><?=ucwords($topArray['news_subject'])?></div>
+                            <div style="margin-bottom: -10px;"><?=ucfirst(substr($topArray['news_description'], 0, 250))?></div>
+                            <small >More >></small>
                         </a></li>
                     <?php
                     }
@@ -36,7 +36,7 @@
             {
                 $valueArray = explode('--^--', $value);
                 ?>
-                <li><a href="<?=__SITE_URL?>pages/readnews/news_id:<?=$this->registry->security->encryptData($valueArray[0])?>"><h3><?=$valueArray[1]?></h3>
+                <li><a href="<?=__SITE_URL?>pages/readnews/news_id:<?=$this->registry->security->encryptData($valueArray[0])?>"><div style="margin-bottom:-12px; color:#4169e1;text-decoration: none; font-weight: bold;""><?=$valueArray[1]?></div>
                     <?=$valueArray[2]?>
                     <small>More >></small>
                 </a></li>
@@ -54,7 +54,7 @@
             {
                 $valueArray = explode('--^--', $value);
                 ?>
-                <li><a href="<?=__SITE_URL?>pages/readnews/news_id:<?=$this->registry->security->encryptData($valueArray[0])?>"><h3><?=$valueArray[1]?></h3>
+                <li><a href="<?=__SITE_URL?>pages/readnews/news_id:<?=$this->registry->security->encryptData($valueArray[0])?>"><div style="margin-bottom:-12px; color:#4169e1;text-decoration: none; font-weight: bold;""><?=$valueArray[1]?></div>
                     <?=$valueArray[2]?>
                     <small>More >></small>
                 </a></li>
@@ -72,7 +72,7 @@
             {
                 $valueArray = explode('--^--', $value);
                 ?>
-                <li><a href="<?=__SITE_URL?>pages/readnews/news_id:<?=$this->registry->security->encryptData($valueArray[0])?>"><h3><?=$valueArray[1]?></h3>
+                <li><a href="<?=__SITE_URL?>pages/readnews/news_id:<?=$this->registry->security->encryptData($valueArray[0])?>"><div style="margin-bottom:-12px; color:#4169e1;text-decoration: none; font-weight: bold;""><?=$valueArray[1]?></div>
                     <?=$valueArray[2]?>
                     <small>More >></small>
                 </a></li>
@@ -90,7 +90,7 @@
             {
                 $valueArray = explode('--^--', $value);
                 ?>
-                <li><a href="<?=__SITE_URL?>pages/readnews/news_id:<?=$this->registry->security->encryptData($valueArray[0])?>"><h3><?=$valueArray[1]?></h3>
+                <li><a href="<?=__SITE_URL?>pages/readnews/news_id:<?=$this->registry->security->encryptData($valueArray[0])?>"><div style="margin-bottom:-12px; color:#4169e1;text-decoration: none; font-weight: bold;""><?=$valueArray[1]?></div>
                     <?=$valueArray[2]?>
                     <small>More >></small>
                 </a></li>

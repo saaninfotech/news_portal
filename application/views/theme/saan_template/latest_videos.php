@@ -1,25 +1,33 @@
 <div class="tabbed_area">
     <div class="heading_tag">Latest Videos</div>
     <table width="100%" border="0">
-        <tr>
-            <td align="left" valign="top"><img name="" src="<?=__TEMPLATE_URL?>images/video1.jpg" width="132"
-                                               height="112" alt=""/></td>
-            <td align="left" valign="top"><img name="" src="<?=__TEMPLATE_URL?>images/video2.jpg" width="132"
-                                               height="112" alt=""/></td>
-        </tr>
-        <tr>
-            <td align="left" valign="top"><a href="">Sample Video Sample sample</a></td>
-            <td align="left" valign="top"><a href="">Sample Video Sample sample</a></td>
-        </tr>
-        <tr>
-            <td align="left" valign="top"><img name="" src="<?=__TEMPLATE_URL?>images/video1.jpg" width="132"
-                                               height="112" alt=""/></td>
-            <td align="left" valign="top"><img name="" src="<?=__TEMPLATE_URL?>images/video2.jpg" width="132"
-                                               height="112" alt=""/></td>
-        </tr>
-        <tr>
-            <td align="left" valign="top"><a href="">Sample Video Sample sample</a></td>
-            <td align="left" valign="top"><a href="">Sample Video Sample sample</a></td>
-        </tr>
+        <?php
+        $AllVideoArray = appController::getAllVideos();
+        if(is_array($AllVideoArray) && count($AllVideoArray) > 0)
+        {
+        ?>
+            <tr>
+                <td align="left" valign="top"><img name="" src="<?=__ADMIN_UPLOAD_URL?>videos/<?=$AllVideoArray[0]['video_id']?>.jpg" width="132"
+                                                   height="112" alt=""/></td>
+                <td align="left" valign="top"><img name="" src="<?=__ADMIN_UPLOAD_URL?>videos/<?=$AllVideoArray[1]['video_id']?>.jpg" width="132"
+                                                   height="112" alt=""/></td>
+            </tr>
+            <tr>
+                <td align="left" valign="top"><a href="<?=__SITE_URL?>pages/viewvideo/video_id:<?=$this->registry->security->encryptData($AllVideoArray[0]['video_id'])?>"><?=ucwords($AllVideoArray[0]['video_tagline'])?></a></td>
+                <td align="left" valign="top"><a href="<?=__SITE_URL?>pages/viewvideo/video_id:<?=$this->registry->security->encryptData($AllVideoArray[1]['video_id'])?>"><?=ucwords($AllVideoArray[1]['video_tagline'])?></a></td>
+            </tr>
+            <tr>
+                <td align="left" valign="top"><img name="" src="<?=__ADMIN_UPLOAD_URL?>videos/<?=$AllVideoArray[2]['video_id']?>.jpg" width="132"
+                                                   height="112" alt=""/></td>
+                <td align="left" valign="top"><img name="" src="<?=__ADMIN_UPLOAD_URL?>videos/<?=$AllVideoArray[3]['video_id']?>.jpg" width="132"
+                                                   height="112" alt=""/></td>
+            </tr>
+            <tr>
+                <td align="left" valign="top"><a href="<?=__SITE_URL?>pages/viewvideo/video_id:<?=$this->registry->security->encryptData($AllVideoArray[2]['video_id'])?>"><?=ucwords($AllVideoArray[2]['video_tagline'])?></a></td>
+                <td align="left" valign="top"><a href="<?=__SITE_URL?>pages/viewvideo/video_id:<?=$this->registry->security->encryptData($AllVideoArray[3]['video_id'])?>"><?=ucwords($AllVideoArray[3]['video_tagline'])?></a></td>
+            </tr>
+        <?php
+        }
+        ?>
     </table>
 </div>

@@ -63,4 +63,31 @@ class appModel
         return self::$db->fetch_rows($query);
     }
 
+    static function getAllPhotos()
+    {
+        $query = "SELECT * FROM photo_details WHERE photo_status = 'active' ORDER BY photo_id DESC LIMIT 0, 10";
+        return self::$db->fetch_rows($query);
+    }
+
+    static function getAllVideos()
+    {
+        $query = "SELECT * FROM video_details WHERE video_status = 'active' ORDER BY video_id DESC LIMIT 0, 10";
+        return self::$db->fetch_rows($query);
+    }
+
+    static function getAllNewsCountByCat()
+    {
+        $query = "SELECT
+                  NC.news_category_name,
+                  count(N.news_id) as news_count
+                FROM
+                  news_details N
+                  INNER JOIN news_category_details NC
+                    ON N.news_category_id = NC.news_category_id
+                WHERE N.news_status = 'active'
+                GROUP BY N.news_category_id
+                ORDER BY N.news_id DESC";
+        return self::$db->fetch_rows($query);
+    }
+
 }

@@ -19,22 +19,18 @@
                     <tr>
                         <td>
                             <!-- ---------------------------------- Start: Slider Banner Section ------------------------------------ -->
-                            <?php require_once('rotating_banner.php'); ?>
+							<div class="tabbed_area">
+                            <table width="100%" cellpadding="0" cellspacing="0">
+								
+								<tr>
+									<td><h3><?=ucwords($NewsArray[0]['news_subject'])?></h3></td>
+								</tr>
+								<tr>
+									<td><?=ucfirst($NewsArray[0]['news_description'])?></td>
+								</tr>
+							</table>
+							</div>
                             <!-- ---------------------------------- Start: Slider Banner Section ------------------------------------ -->
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <!-- -------------------------- Start: Tabbed Content ---------------------------------- -->
-                            <?php require_once('tabbed_content.php'); ?>
-                            <!-- -------------------------- End: Tabbed Content ---------------------------------- -->
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <!-- -------------------------- Start: Photo SlideShow ---------------------------------- -->
-                            <?php require_once('latest_photos.php'); ?>
-                            <!-- -------------------------- End: Photo SlideShow ------------------------------------ -->
                         </td>
                     </tr>
                 </table>
@@ -51,17 +47,16 @@
                     </tr>
                     <tr>
                         <td>
-                            <!-- ----------------------- Start: Latest Videos Section ----------------------------- -->
-                            <?php require_once('latest_videos.php'); ?>
-                            <!-- -------------------------- End: Latest Videos Section ----------------------------- -->
-
+                            <!-- ------------------------------- Start: Right Tabbed Section -------------------------------- -->
+                            <?php require_once('right_content.php'); ?>
+                            <!-- ------------------------------- End: Right Tabbed Section -------------------------------- -->
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <!-- ------------------------------- Start: Right Tabbed Section -------------------------------- -->
-                            <?php require_once('right_content.php'); ?>
-                            <!-- ------------------------------- End: Right Tabbed Section -------------------------------- -->
+                            <!-- ----------------------- Start: Latest Videos Section ----------------------------- -->
+                            <?php require_once('latest_videos.php'); ?>
+                            <!-- -------------------------- End: Latest Videos Section ----------------------------- -->
                         </td>
                     </tr>
                 </table>

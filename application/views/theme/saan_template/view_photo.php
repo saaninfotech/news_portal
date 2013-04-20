@@ -19,22 +19,17 @@
                     <tr>
                         <td>
                             <!-- ---------------------------------- Start: Slider Banner Section ------------------------------------ -->
-                            <?php require_once('rotating_banner.php'); ?>
+							<div class="tabbed_area">
+                            <table width="100%" cellpadding="0" cellspacing="0">
+								<tr>
+									<td><img src="<?=__ADMIN_UPLOAD_URL?>photos/<?=$PhotoArray[0]['photo_id']?>.jpg" width="100%"></td>
+								</tr>
+								<tr>
+									<td><h3><?=ucwords($PhotoArray[0]['photo_tagline'])?></h3></td>
+								</tr>
+							</table>
+							</div>
                             <!-- ---------------------------------- Start: Slider Banner Section ------------------------------------ -->
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <!-- -------------------------- Start: Tabbed Content ---------------------------------- -->
-                            <?php require_once('tabbed_content.php'); ?>
-                            <!-- -------------------------- End: Tabbed Content ---------------------------------- -->
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <!-- -------------------------- Start: Photo SlideShow ---------------------------------- -->
-                            <?php require_once('latest_photos.php'); ?>
-                            <!-- -------------------------- End: Photo SlideShow ------------------------------------ -->
                         </td>
                     </tr>
                 </table>
