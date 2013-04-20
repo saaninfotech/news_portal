@@ -65,9 +65,21 @@ define('__VIEW_URL', __APPLICATION_URL . "/views/");
 
 define('__EXTERNAL_PATH', __SITE_PATH . "/externals");
 
+define('__EXTRA_PATH', __SITE_PATH . "/extras");
+
+define('__CACHE_PATH', __EXTRA_PATH . "/cache");
+
 define('__UPLOAD_PATH', __VIEW_PATH . "uploads/");
 
 define('__UPLOAD_URL', __VIEW_URL . "uploads/");
+
+define('__ADMIN_URL', __SITE_URL . "techadmin/");
+
+define('__ADMIN_PATH', __SITE_PATH . "/techadmin/");
+
+define('__ADMIN_UPLOAD_URL', __ADMIN_URL . "application/views/uploads/");
+
+define('__ADMIN_UPLOAD_PATH', __ADMIN_PATH . "/application/views/uploads");
 
 /******************************* End: Application Path ******************************** */
 

@@ -42,6 +42,9 @@ $registry->security = new Security();
 //This initializes the Image Resize Class
 $registry->image = new ImageResize();
 
+//This initializes the Cache Handler Class
+$registry->cache = new CacheHandler($cacheConfig);
+
 //This initializes the Mailer Class
 $registry->mailer = Swift_Mailer::newInstance($transport);
 

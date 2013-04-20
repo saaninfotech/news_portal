@@ -143,6 +143,7 @@ require __CORE_PATH . 'class.Validation.php';
 require __CORE_PATH . 'class.General.php';
 require __CORE_PATH . 'class.Security.php';
 require __CORE_PATH . 'class.ImageResize.php';
+require __CORE_PATH . 'class.CacheHandler.php';
 
 //This is done to provide the common controller and model apart from the SAAN Controller and SAAN Model.
 require_once __MODEL_PATH . "appModel.php";

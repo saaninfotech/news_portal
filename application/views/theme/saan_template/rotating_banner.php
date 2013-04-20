@@ -8,92 +8,30 @@
             <!-- MAIN CONTENT -->
             <div class="main-slider-content" style="width:684px; height:300px;">
                 <ul class="sliders-wrap-inner">
-                    <li><img src="<?=__TEMPLATE_URL?>images/thumbl_980x340.png" title="Newsflash 2" width="100%"
-                             height="340">
+                    <?php
+                    if(is_array($BannerPhotoArray) && count($BannerPhotoArray) > 0)
+                    {
+                        foreach($BannerPhotoArray as $bannerKey=>$bannerArray)
+                        {
+                            ?>
+                            <li><img src="<?=__ADMIN_UPLOAD_URL?>banner_photos/<?=$bannerArray['banner_photo_id']?>.jpg" title="<?=$bannerArray['banner_photo_tagline']?>" width="100%"
+                                     height="340">
 
-                        <div class="slider-description">
-                            <div class="slider-meta"><a target="_parent" title="Newsflash 1"
-                                                        href="#Category-1">/ Newsflash 1 /</a> <i> —
-                                Monday, February 15, 2010 12:42</i></div>
-                            <h4>Content of Newsflash 1</h4>
+                                <div class="slider-description">
+                                    <div class="slider-meta"><a target="_parent" title="<?=$bannerArray['banner_photo_tagline']?>"
+                                                                href="#Category-1">/ <?=$bannerArray['banner_photo_tagline']?> /</a> <i> —
+                                        <?=date("d M Y H:i A")?></i></div>
+                                    <h4><?=ucwords($bannerArray['banner_photo_tagline'])?></h4>
 
-                            <p>This is sample text. This is sample text. This is sample text. This is sample text. This
-                                is sample text. This is sample text. This is sample text. ,... <a class="readmore"
-                                                                                                  href="#">Read
-                                    more </a></p>
-                        </div>
-                    </li>
-                    <li><img src="<?=__TEMPLATE_URL?>images/thumbl_980x340_002.png" title="Newsflash 1" width="100%"
-                             height="340">
-
-                        <div class="slider-description">
-                            <div class="slider-meta"><a target="_parent" title="Newsflash 2"
-                                                        href="#Category-2">/ Newsflash 2 /</a> <i> —
-                                Monday, February 15, 2010 12:42</i></div>
-                            <h4>Content of Newsflash 2</h4>
-
-                            <p>This is sample text. This is sample text. This is sample text. This is sample text. This
-                                is sample text. This is sample text. This is sample text. This is sample text. This is
-                                sample text. ... <a class="readmore" href="#">Read
-                                    more </a></p>
-                        </div>
-                    </li>
-                    <li><img src="<?=__TEMPLATE_URL?>images/thumbl_980x340_003.png" title="Newsflash 3" width="100%"
-                             height="340">
-
-                        <div class="slider-description">
-                            <div class="slider-meta"><a target="_parent" title="Newsflash 3"
-                                                        href="#Category-3">/ Newsflash 3 /</a> <i> —
-                                Monday, February 15, 2010 12:42</i></div>
-                            <h4>Content of Newsflash 3</h4>
-
-                            <p>This is sample text. This is sample text. This is sample text. This is sample text. This
-                                is sample text. This is sample text. This is sample text. ... <a class="readmore"
-                                                                                                 href="#">Read more </a>
-                            </p>
-                        </div>
-                    </li>
-                    <li><img src="<?=__TEMPLATE_URL?>images/thumbl_980x340_004.png" title="Newsflash 5" width="100%"
-                             height="340">
-
-                        <div class="slider-description">
-                            <div class="slider-meta"><a target="_parent" title="Newsflash 4"
-                                                        href="#Category-4">/ Newsflash 4 /</a> <i> —
-                                Monday, February 15, 2010 12:42</i></div>
-                            <h4>Content of Newsflash 4</h4>
-
-                            <p>This is sample text. This is sample text. This is sample text. This is sample text. This
-                                is sample text. This is sample text. This is sample text. ... <a class="readmore"
-                                                                                                 href="#">Read
-                                    more </a></p>
-                        </div>
-                    </li>
-                    <li><img src="<?=__TEMPLATE_URL?>images/thumbl_980x340_005.png" title="Newsflash 5" width="100%"
-                             height="340">
-
-                        <div class="slider-description">
-                            <div class="slider-meta"><a target="_parent" title="Newsflash 5" href="#">/
-                                Newsflash 5 /</a> <i> — Monday, February 15, 2010 12:42</i></div>
-                            <h4>Content of Newsflash 5</h4>
-
-                            <p>This is sample text. This is sample text. This is sample text. This is sample text. This
-                                is sample text. This is sample text. ... <a class="readmore" href="#">Read
-                                    more </a></p>
-                        </div>
-                    </li>
-                    <li><img src="<?=__TEMPLATE_URL?>images/thumbl_980x340_006.png" title="Newsflash 5" width="100%"
-                             height="340">
-
-                        <div class="slider-description">
-                            <div class="slider-meta"><a target="_parent" title="Newsflash 6" href="#">/
-                                Newsflash 6 /</a> <i> — Monday, February 15, 2010 12:42</i></div>
-                            <h4>Content of Newsflash 6</h4>
-
-                            <p>This is sample text. This is sample text. This is sample text. This is sample text. This
-                                is sample text. This is sample text. ... <a class="readmore" href="#">Read
-                                    more </a></p>
-                        </div>
-                    </li>
+                                    <p><?=$bannerArray['banner_photo_description']?>... <a class="readmore"
+                                                                                                          href="#">Read
+                                            more </a></p>
+                                </div>
+                            </li>
+                            <?php
+                        }
+                    }
+                    ?>
                 </ul>
             </div>
             <!-- END MAIN CONTENT -->
@@ -101,47 +39,24 @@
             <div class="navigator-content">
                 <div class="navigator-wrapper">
                     <ul class="navigator-wrap-inner">
-                        <li><img src="<?=__TEMPLATE_URL?>images/lofthumbs/1.jpg" width="200" height="100"/></li>
-                        <li>
-                            <div><img src="<?=__TEMPLATE_URL?>images/lofthumbs/2.jpg"/>
+                        <?php
+                        if(is_array($BannerPhotoArray) && count($BannerPhotoArray) > 0)
+                        {
+                            foreach($BannerPhotoArray as $bannerKey=>$bannerArray)
+                            {
+                            ?>
+                                <li>
+                                    <div><img src="<?=__ADMIN_UPLOAD_URL?>banner_photos/<?=$bannerArray['banner_photo_id']?>.jpg" width="200" height="100"/>
 
-                                <h3> NewsFlash 2 </h3>
-                                <span>20.01.2010</span> This is sample text. This is sample text. This is sample text. .
-                                ..
-                            </div>
-                        </li>
-                        <li>
-                            <div><img src="<?=__TEMPLATE_URL?>images/lofthumbs/3.jpg"/>
+                                        <h3></h3>
+                                        <span></span>
+                                    </div>
+                                </li>
+                            <?php
+                            }
+                        }
+                        ?>
 
-                                <h3> NewsFlash 3 </h3>
-                                <span>20.01.2010</span> - This is sample text. This is sample text. This is sample text.
-                                This is sample text. . ..
-                            </div>
-                        </li>
-                        <li>
-                            <div><img src="<?=__TEMPLATE_URL?>images/lofthumbs/4.jpg"/>
-
-                                <h3> NewsFlash 4</h3>
-                                <span>20.01.2010</span> - This is sample text. This is sample text. This is sample text.
-                                This is sample text. . ..
-                            </div>
-                        </li>
-                        <li>
-                            <div><img src="<?=__TEMPLATE_URL?>images/lofthumbs/5.jpg"/>
-
-                                <h3> NewsFlash 5</h3>
-                                <span>20.01.2010</span> -This is sample text. This is sample text. This is sample text.
-                                This is sample text. This is sample text. . ..
-                            </div>
-                        </li>
-                        <li>
-                            <div><img src="<?=__TEMPLATE_URL?>images/lofthumbs/6.jpg"/>
-
-                                <h3> NewsFlash 6</h3>
-                                <span>20.01.2010</span> - This is sample text. This is sample text. This is sample text.
-                                This is sample text. . ..
-                            </div>
-                        </li>
                     </ul>
                 </div>
             </div>

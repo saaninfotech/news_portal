@@ -53,3 +53,9 @@ define('FAILED_NAME', "HiiFan News");
 
 /* *********************** Start: the credentials for the Mailer Component ********************* */
 define('RECORDS_PER_PAGE', 10);
+
+/** **************************** Start: This is the CAche Configuration **************** */
+$cacheConfig['cache'] = array(
+    'priority_required' => 50,
+    'caching_path' => __CACHE_PATH . "/"
+);

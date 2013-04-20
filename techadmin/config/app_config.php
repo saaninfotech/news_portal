@@ -70,3 +70,9 @@ define('PAYPAL_VERSION', '64');
 /** ************************ Start: Credentials for Paypal Payment Process ********************* */
 
 define('RECORDS_PER_PAGE', 10);
+
+/** **************************** Start: This is the CAche Configuration **************** */
+$config['cache'] = array(
+    'priority_required' => 50,
+    'caching_path' => __CACHE_PATH
+);

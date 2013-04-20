@@ -20,7 +20,7 @@
 @session_start();
 
 //This is for the Error Reporting Handling
-error_reporting(0);
+//error_reporting(0);
 
 //This is the setting for the Local Mode
 define("LOCAL_MODE", TRUE);
@@ -90,14 +90,14 @@ if (ini_get('magic_quotes_gpc')) {
 require_once("config/app_config.php");
 
 /** *****************Start: Settings for Paypal Payment Gateway ************************** */
-
+/*
 if (PAYPAL_USE_SANDBOX === TRUE) {
     define('PAYPAL_API_ENDPOINT', 'https://api-3t.sandbox.paypal.com/nvp');
     define('PAYPAL_URL', "https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&token=");
 } else {
     define('PAYPAL_API_ENDPOINT', "https://api-3t.paypal.com/nvp");
     define('PAYPAL_URL', "https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=");
-}
+}*/
 
 //This includes the Paypal Payment Gateway.
 require_once __HELPER_PATH . 'class.PaypalPayment.php';
@@ -142,6 +142,7 @@ require __CORE_PATH . 'class.Validation.php';
 require __CORE_PATH . 'class.General.php';
 require __CORE_PATH . 'class.Security.php';
 require __CORE_PATH . 'class.ImageResize.php';
+require __CORE_PATH . 'class.CacheHandler.php';
 
 //This is done to provide the common controller and model apart from the SAAN Controller and SAAN Model.
 require_once __MODEL_PATH . "appModel.php";
