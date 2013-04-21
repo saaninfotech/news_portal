@@ -61,4 +61,14 @@ class pagesModel extends SaanModel
             return $this->db->fetch_rows($query);
         }
     }
+
+    public function getVideoByVideoId($videoId)
+    {
+        if($videoId != '')
+        {
+            $query = "SELECT * FROM video_details WHERE video_id = '$videoId'";
+            return $this->db->fetch_rows($query);
+        }
+
+    }
 }

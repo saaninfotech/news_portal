@@ -65,6 +65,8 @@ define('__VIEW_URL', __APPLICATION_URL . "/views/");
 
 define('__EXTERNAL_PATH', __SITE_PATH . "/externals");
 
+define('__EXTERNAL_URL', __SITE_URL . "externals/");
+
 define('__EXTRA_PATH', __SITE_PATH . "/extras");
 
 define('__CACHE_PATH', __EXTRA_PATH . "/cache");

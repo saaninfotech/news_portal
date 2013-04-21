@@ -7,9 +7,9 @@
         {
         ?>
             <tr>
-                <td align="left" valign="top"><img name="" src="<?=__ADMIN_UPLOAD_URL?>videos/<?=$AllVideoArray[0]['video_id']?>.jpg" width="132"
+                <td align="left" valign="top"><img name="" src="<?=__ADMIN_UPLOAD_URL?>videos/video.png" width="132"
                                                    height="112" alt=""/></td>
-                <td align="left" valign="top"><img name="" src="<?=__ADMIN_UPLOAD_URL?>videos/<?=$AllVideoArray[1]['video_id']?>.jpg" width="132"
+                <td align="left" valign="top"><img name="" src="<?=__ADMIN_UPLOAD_URL?>videos/video.png" width="132"
                                                    height="112" alt=""/></td>
             </tr>
             <tr>
@@ -17,9 +17,9 @@
                 <td align="left" valign="top"><a href="<?=__SITE_URL?>pages/viewvideo/video_id:<?=$this->registry->security->encryptData($AllVideoArray[1]['video_id'])?>"><?=ucwords($AllVideoArray[1]['video_tagline'])?></a></td>
             </tr>
             <tr>
-                <td align="left" valign="top"><img name="" src="<?=__ADMIN_UPLOAD_URL?>videos/<?=$AllVideoArray[2]['video_id']?>.jpg" width="132"
+                <td align="left" valign="top"><img name="" src="<?=__ADMIN_UPLOAD_URL?>videos/video.png" width="132"
                                                    height="112" alt=""/></td>
-                <td align="left" valign="top"><img name="" src="<?=__ADMIN_UPLOAD_URL?>videos/<?=$AllVideoArray[3]['video_id']?>.jpg" width="132"
+                <td align="left" valign="top"><img name="" src="<?=__ADMIN_UPLOAD_URL?>videos/<?php //$AllVideoArray[3]['video_id']?>video.png" width="132"
                                                    height="112" alt=""/></td>
             </tr>
             <tr>

@@ -82,4 +82,19 @@ class pagesController extends SaanController
         }
         $this->registry->template->show("view_news");
     }
+
+    public function viewvideo($args)
+    {
+        $this->registry->template->Title = "SAAN Infotech :: Home Page";
+        if(is_array($args) && count($args) > 0)
+        {
+            $videoId = $this->registry->security->decryptData($args['video_id']);
+            if($videoId != '')
+            {
+                $videoArray = $this->registry->model->run('getVideoByVideoId', $videoId);
+            }
+            $this->registry->template->VideoArray = $videoArray;
+        }
+        $this->registry->template->show("view_video");
+    }
 }
