@@ -115,7 +115,7 @@ require __HELPER_PATH . 'class.Captcha.php';
 require __HELPER_PATH . 'class.BreadCrumbs.php';
 
 //This is the Cache Class
-//require __HELPER_PATH . 'class.CacheHandler.php';
+require __HELPER_PATH . 'class.CacheHandler.php';
 
 /* ************************* Start: This is to manage the Template for the Application ******************** */
 

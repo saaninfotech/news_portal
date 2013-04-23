@@ -111,6 +111,8 @@ class adminhomeController extends SaanController
                     $postArray['news_category_id'] = $categoryId;
                     $this->registry->model->run('updateNewsCategoryById', $postArray);
                     $_SESSION['success'] = "News Category Updated successfully";
+                    appController::cacheNewsCategoryCache();
+                    appController::cacheNewsCount();
                     General::redirect($_SERVER['HTTP_REFERER']);
                     exit;
                 }
@@ -128,6 +130,8 @@ class adminhomeController extends SaanController
         $categoryId = $this->registry->security->decryptData($args['news_category_id']);
         $this->registry->model->run('deleteCategory', $categoryId);
         $_SESSION['success'] = "News Category Deleted Successfully";
+        appController::cacheNewsCategoryCache();
+        appController::cacheNewsCount();
         General::redirect($_SERVER['HTTP_REFERER']);
         exit;
     }
@@ -137,6 +141,8 @@ class adminhomeController extends SaanController
         $categoryId = $this->registry->security->decryptData($args['news_category_id']);
         $this->registry->model->run('activateCategory', $categoryId);
         $_SESSION['success'] = "News Category Successfully";
+        appController::cacheNewsCategoryCache();
+        appController::cacheNewsCount();
         General::redirect($_SERVER['HTTP_REFERER']);
         exit;
     }
@@ -146,6 +152,8 @@ class adminhomeController extends SaanController
         $categoryId = $this->registry->security->decryptData($args['news_category_id']);
         $this->registry->model->run('deactivateCategory', $categoryId);
         $_SESSION['success'] = "News Category Deactivated Successfully";
+        appController::cacheNewsCategoryCache();
+        appController::cacheNewsCount();
         General::redirect($_SERVER['HTTP_REFERER']);
         exit;
     }
@@ -193,6 +201,10 @@ class adminhomeController extends SaanController
                 /* *********************** End: Formation of the POST Array for Submission *********************** */
                 $this->registry->model->run(addCategory, $postData);
                 $_SESSION['success'] = "Category Added Successfully";
+                appController::cacheNewsCategoryCache();
+                appController::cacheNewsCount();
+                General::redirect($_SERVER['HTTP_REFERER']);
+                exit;
 
             } else {
 
@@ -255,6 +267,9 @@ class adminhomeController extends SaanController
                 /* *********************** End: Formation of the POST Array for Submission *********************** */
                 $this->registry->model->run(addNews, $postData);
                 $_SESSION['success'] = "News Added Successfully";
+                appController::cacheTopStories();
+                appController::cacheNews();
+                appController::cacheNewsCount();
                 General::redirect($_SERVER['HTTP_REFERER']);
                 exit;
 
@@ -286,6 +301,9 @@ class adminhomeController extends SaanController
         $newsId = $this->registry->security->decryptData($args['news_id']);
         $this->registry->model->run('deleteNews', $newsId);
         $_SESSION['success'] = "News Deleted Successfully";
+        appController::cacheTopStories();
+        appController::cacheNews();
+        appController::cacheNewsCount();
         General::redirect($_SERVER['HTTP_REFERER']);
         exit;
     }
@@ -295,6 +313,9 @@ class adminhomeController extends SaanController
         $newsId = $this->registry->security->decryptData($args['news_id']);
         $this->registry->model->run('activateNews', $newsId);
         $_SESSION['success'] = "News Activated Successfully";
+        appController::cacheTopStories();
+        appController::cacheNews();
+        appController::cacheNewsCount();
         General::redirect($_SERVER['HTTP_REFERER']);
         exit;
     }
@@ -304,6 +325,9 @@ class adminhomeController extends SaanController
         $newsId = $this->registry->security->decryptData($args['news_id']);
         $this->registry->model->run('deactivateNews', $newsId);
         $_SESSION['success'] = "News Deactivated Successfully";
+        appController::cacheTopStories();
+        appController::cacheNews();
+        appController::cacheNewsCount();
         General::redirect($_SERVER['HTTP_REFERER']);
         exit;
     }
@@ -342,6 +366,9 @@ class adminhomeController extends SaanController
 
                 $this->registry->model->run('updateNewsById', $postArray);
                 $_SESSION['success'] = "News Edited Successfully";
+                appController::cacheTopStories();
+                appController::cacheNews();
+                appController::cacheNewsCount();
                 General::redirect($_SERVER['HTTP_REFERER']);
                 exit;
 
@@ -410,6 +437,7 @@ class adminhomeController extends SaanController
                         __ADMIN_UPLOAD_PATH . "photos/" . $photoName);
 
                         $_SESSION['success'] = "Photo Added Successfully";
+                        appController::cachePhotos();
                         General::redirect($_SERVER['HTTP_REFERER']);
                         exit;
 
@@ -431,6 +459,7 @@ class adminhomeController extends SaanController
             unlink( __ADMIN_UPLOAD_PATH . "photos/" . $photoId . ".jpg");
         }
         $_SESSION['success'] = "Photo Deleted Successfully";
+        appController::cachePhotos();
         General::redirect($_SERVER['HTTP_REFERER']);
         exit;
     }
@@ -440,6 +469,7 @@ class adminhomeController extends SaanController
         $photoId = $this->registry->security->decryptData($args['photo_id']);
         $this->registry->model->run('activatePhoto', $photoId);
         $_SESSION['success'] = "Photo Activated Successfully";
+        appController::cachePhotos();
         General::redirect($_SERVER['HTTP_REFERER']);
         exit;
     }
@@ -449,6 +479,7 @@ class adminhomeController extends SaanController
         $photoId = $this->registry->security->decryptData($args['photo_id']);
         $this->registry->model->run('deactivatePhoto', $photoId);
         $_SESSION['success'] = "Photo Deactivated Successfully";
+        appController::cachePhotos();
         General::redirect($_SERVER['HTTP_REFERER']);
         exit;
     }
@@ -504,6 +535,7 @@ class adminhomeController extends SaanController
                             __ADMIN_UPLOAD_PATH . "photos/" . $photoName);
 
                         $_SESSION['success'] = "Photo Edited Successfully";
+                        appController::cachePhotos();
                         General::redirect($_SERVER['HTTP_REFERER']);
                         exit;
 
@@ -521,6 +553,7 @@ class adminhomeController extends SaanController
 
                 $this->registry->model->run('updatePhotoByPhotoId', $dataArray);
                 $_SESSION['success'] = "Photo Edited Successfully";
+                appController::cachePhotos();
                 General::redirect($_SERVER['HTTP_REFERER']);
                 exit;
             }
@@ -580,6 +613,7 @@ class adminhomeController extends SaanController
                         __ADMIN_UPLOAD_PATH . "videos/" . $videoName);
 
                     $_SESSION['success'] = "Video Added Successfully";
+                    appController::cacheVideos();
                     General::redirect($_SERVER['HTTP_REFERER']);
                     exit;
 
@@ -601,6 +635,7 @@ class adminhomeController extends SaanController
             unlink( __ADMIN_UPLOAD_PATH . "videos/" . $videoId . ".jpg");
         }
         $_SESSION['success'] = "Video Deleted Successfully";
+        appController::cacheVideos();
         General::redirect($_SERVER['HTTP_REFERER']);
         exit;
     }
@@ -610,6 +645,7 @@ class adminhomeController extends SaanController
         $videoId = $this->registry->security->decryptData($args['video_id']);
         $this->registry->model->run('activateVideo', $videoId);
         $_SESSION['success'] = "Video Activated Successfully";
+        appController::cacheVideos();
         General::redirect($_SERVER['HTTP_REFERER']);
         exit;
     }
@@ -619,6 +655,7 @@ class adminhomeController extends SaanController
         $videoId = $this->registry->security->decryptData($args['video_id']);
         $this->registry->model->run('deactivateVideo', $videoId);
         $_SESSION['success'] = "Video Deactivated Successfully";
+        appController::cacheVideos();
         General::redirect($_SERVER['HTTP_REFERER']);
         exit;
     }
@@ -674,6 +711,7 @@ class adminhomeController extends SaanController
                             __ADMIN_UPLOAD_PATH . "videos/" . $videoName);
 
                         $_SESSION['success'] = "Video Edited Successfully";
+                        appController::cacheVideos();
                         General::redirect($_SERVER['HTTP_REFERER']);
                         exit;
 
@@ -691,6 +729,7 @@ class adminhomeController extends SaanController
 
                 $this->registry->model->run('updateVideoByVideoId', $dataArray);
                 $_SESSION['success'] = "Video Edited Successfully";
+                appController::cacheVideos();
                 General::redirect($_SERVER['HTTP_REFERER']);
                 exit;
             }
@@ -755,6 +794,7 @@ class adminhomeController extends SaanController
                         __ADMIN_UPLOAD_PATH . "banner_photos/" . $bannerPhotoName);
 
                     $_SESSION['success'] = "Banner Photo Added Successfully";
+                    appController::cacheBannerPhoto();
                     General::redirect($_SERVER['HTTP_REFERER']);
                     exit;
 
@@ -776,6 +816,7 @@ class adminhomeController extends SaanController
             unlink( __ADMIN_UPLOAD_PATH . "banner_photos/" . $bannerPhotoId . ".jpg");
         }
         $_SESSION['success'] = "Banner Photo Deleted Successfully";
+        appController::cacheBannerPhoto();
         General::redirect($_SERVER['HTTP_REFERER']);
         exit;
     }
@@ -785,6 +826,7 @@ class adminhomeController extends SaanController
         $bannerPhotoId = $this->registry->security->decryptData($args['banner_photo_id']);
         $this->registry->model->run('activateBannerPhoto', $bannerPhotoId);
         $_SESSION['success'] = "Banner Photo Activated Successfully";
+        appController::cacheBannerPhoto();
         General::redirect($_SERVER['HTTP_REFERER']);
         exit;
     }
@@ -794,6 +836,7 @@ class adminhomeController extends SaanController
         $bannerPhotoId = $this->registry->security->decryptData($args['banner_photo_id']);
         $this->registry->model->run('deactivateBannerPhoto', $bannerPhotoId);
         $_SESSION['success'] = "Banner Photo Deactivated Successfully";
+        appController::cacheBannerPhoto();
         General::redirect($_SERVER['HTTP_REFERER']);
         exit;
     }
@@ -849,6 +892,7 @@ class adminhomeController extends SaanController
                             __ADMIN_UPLOAD_PATH . "banner_photos/" . $bannerPhotoName);
 
                         $_SESSION['success'] = "Banner Photo Edited Successfully";
+                        appController::cacheBannerPhoto();
                         General::redirect($_SERVER['HTTP_REFERER']);
                         exit;
 
@@ -866,6 +910,7 @@ class adminhomeController extends SaanController
 
                 $this->registry->model->run('updateBannerPhotoByBannerPhotoId', $dataArray);
                 $_SESSION['success'] = "Banner Photo Edited Successfully";
+                appController::cacheBannerPhoto();
                 General::redirect($_SERVER['HTTP_REFERER']);
                 exit;
             }
